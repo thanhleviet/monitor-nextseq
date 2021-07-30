@@ -64,7 +64,12 @@ class RunFolder():
     def status_files_exists(self):
         status_files = False
         if self.is_existed:
-            status_files = any([file for file in self.full_path.iterdir() if file.is_file() and file.name in STATUS_FILES])
+            sum_files = sum([file.is_file() and file.name in STATUS_FILES
+                               for file in self.full_path.iterdir()])
+            if sum_files == 1 and "NB501061" in self.name:
+                status_files = True
+            elif sum_files == 2:
+                status_files = True
         return status_files
 
     @property

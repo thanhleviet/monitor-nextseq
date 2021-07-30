@@ -31,10 +31,11 @@ def _monitor(machine_name):
     NS = Nextseq(machine_name, NEXTSEQ[machine_name], BACKUP_LOCATION)
     if NS.path_accessible:
         latest_run_backup_location = RunFolder(NS.latest_run_name, BACKUP_LOCATION)
-        logger.info(
-            f"{latest_run_backup_location.name}: {list(set(latest_run_backup_location.count_bgzf()))}")
         if not (latest_run_backup_location.is_existed and latest_run_backup_location.is_fully_copied):
             NS.copy()
+            logger.info(
+                f"{latest_run_backup_location.name}: {list(set(latest_run_backup_location.count_bgzf()))}"
+                )
         else:
             logger.critical(f"{latest_run_backup_location.name} is finished!")
     else:
