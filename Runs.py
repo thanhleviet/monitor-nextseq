@@ -66,6 +66,7 @@ class RunFolder():
         if self.is_existed:
             sum_files = sum([file.is_file() and file.name in STATUS_FILES
                                for file in self.full_path.iterdir()])
+            logger.opt(colors=True).info(f"Status files: <green>{sum_files}</>")
             if sum_files == 1 and "NB501061" in self.name:
                 status_files = True
             elif sum_files == 2:

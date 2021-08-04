@@ -26,15 +26,15 @@ def check_tool_exists(task):
         raise CancelExecution("Exit!")
 
 @huey.task()
-@huey.lock_task('monitor_lock')
+# @huey.lock_task('monitor_lock')
 def _monitor(machine_name):
     NS = Nextseq(machine_name, NEXTSEQ[machine_name], BACKUP_LOCATION)
     if NS.path_accessible:
         latest_run_backup_location = RunFolder(NS.latest_run_name, BACKUP_LOCATION)
         if not (latest_run_backup_location.is_existed and latest_run_backup_location.is_fully_copied):
             NS.copy()
-            logger.info(
-                f"{latest_run_backup_location.name}: {list(set(latest_run_backup_location.count_bgzf()))}"
+            logger.opt(ansi=True).info(
+                f"{latest_run_backup_location.name}: <yellow>{list(set(latest_run_backup_location.count_bgzf()))}</>"
                 )
         else:
             logger.critical(f"{latest_run_backup_location.name} is finished!")
