@@ -1,4 +1,4 @@
-###○ A simple queue to monitor and copy new runs from Nextseq machines to a staging location.
+### A simple queue to monitor and copy new runs from Nextseq machines to a staging location.
 
 #### Installation:
  
