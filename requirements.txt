@@ -4,3 +4,4 @@ huey>=2
 python-dotenv==0.19.0
 greenlet==1.1.0
 gevent
+discord-webhook

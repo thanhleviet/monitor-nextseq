@@ -45,7 +45,7 @@ class Nextseq():
     def copy(self):
         destination = pathlib.Path(self.backup_location).joinpath(
             self.latest_run_name)
-        copy_cmd = f"rclone copy -P {self.latest_run_path} {destination}"
+        copy_cmd = f"rclone copy -P --bwlimit=60M {self.latest_run_path} {destination}"
         logger.info(copy_cmd)
         subprocess.run(copy_cmd, shell=True, check=True)
 
